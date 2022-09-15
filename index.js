@@ -1,6 +1,3 @@
-/* Shivving (IE8 is not supported, but at least it won't look as awful)
-/* ========================================================================== */
-
 (function (document) {
 	var
 	head = document.head = document.getElementsByTagName('head')[0] || document.documentElement,
@@ -23,8 +20,7 @@
 	return head.insertBefore(element.lastChild, head.firstChild);
 })(document);
 
-/* Prototyping
-/* ========================================================================== */
+// Prototyping
 
 (function (window, ElementPrototype, ArrayPrototype, polyfill) {
 	function NodeList() { [polyfill] }
@@ -62,9 +58,6 @@
 	};
 })(this, Element.prototype, Array.prototype);
 
-/* Helper Functions
-/* ========================================================================== */
-
 function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
 
@@ -85,9 +78,6 @@ function parsePrice(number) {
 	return number.toFixed(2).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,');
 }
 
-/* Update Number
-/* ========================================================================== */
-
 function updateNumber(e) {
 	var
 	activeElement = document.activeElement,
@@ -106,56 +96,35 @@ function updateNumber(e) {
 	updateInvoice();
 }
 
-/* Update Invoice
-/* ========================================================================== */
-
 function updateInvoice() {
 	var total = 0;
-	var cells, price, total, a, i;
-
-	// update inventory cells
-	// ======================
+	var subtotal = 0;
+	var vat = 0;
+	var cells, price, subtotal, vat, total, a, i;
 
 	for (var a = document.querySelectorAll('table.inventory tbody tr'), i = 0; a[i]; ++i) {
-		// get inventory row cells
 		cells = a[i].querySelectorAll('span:last-child');
 
-		// set price as cell[2] * cell[3]
 		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
-
-		// add price to total
-		total += price;
-
-		// set row total
+		
+		subtotal += price;
 		cells[4].innerHTML = price;
 	}
 
-	// update balance cells
-	// ====================
-
-	// get balance cells
 	cells = document.querySelectorAll('table.balance td:last-child span:last-child');
 
-	// set total
-	cells[0].innerHTML = total;
+	cells[0].innerHTML = subtotal;
+	cells[1].innerHTML.value = vat
+	cells[2].innerHTML = total;
 
-	// set balance and meta balance
-	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
-
-	// update prefix formatting
-	// ========================
-
+	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(subtotal + parseFloatHTML(cells[1]) - (parseFloatHTML(cells[3])));
+	cells[4].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(subtotal + parseFloatHTML(cells[1]) - (parseFloatHTML(cells[3])));
+	
 	var prefix = document.querySelector('#prefix').innerHTML;
 	for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
 
-	// update price formatting
-	// =======================
-
 	for (a = document.querySelectorAll('span[data-prefix] + span'), i = 0; a[i]; ++i) if (document.activeElement != a[i]) a[i].innerHTML = parsePrice(parseFloatHTML(a[i]));
 }
-
-/* On Content Load
-/* ========================================================================== */
 
 function onContentLoad() {
 	updateInvoice();

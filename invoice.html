@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+		<script src="index.js"></script>
+		<!-- <script type="text/javascript" src="time.js"></script> -->
+	</head>
+
+	<body onselectstart="return false">
+		<header contenteditable>
+			<img src="rccg-logo.png" alt="RCCG Logo">
+			<p class="img_alt">RCCG INFORMATION GATEWAY, ICT PLAZA, REDEMPTION CAMP</p>
+			<address>
+				<table class="meta_1">
+					<tr>
+						<th>Attention:</th>
+						<td contenteditable>The HOD</td>
+					</tr>
+					<tr>
+						<th>Company:</th>
+						<td contenteditable>Courage Magazine</td>
+					</tr>
+					<tr>
+						<th>Address:</th>
+						<td contenteditable>KM26 Lagos Ibadan Expressway Mowe, Ogun State.</td>
+					</tr>
+				</table>
+
+				<table class="meta_2">
+					<tr>
+						<td contenteditable>PROFORMA</td>
+					</tr>
+					<tr>
+						<td contenteditable>NO:	RCCG/ICT/08/2022</td>
+					</tr>
+				</table>
+			</address>
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address contenteditable>
+				<p>courage magazine</p>
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span contenteditable>Invoice #</span></th>
+					<td><span contenteditable>01</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Date</span></th>
+					<td><span id="date" contenteditable></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Time</span></th>
+					<td><span id="time" contenteditable></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>To Balance</span></th>
+					<td><span id="prefix" contenteditable>#</span><span>600.00</span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span contenteditable>Item</span></th>
+						<th><span contenteditable>Description</span></th>
+						<th><span contenteditable>Rate</span></th>
+						<th><span contenteditable>Quantity</span></th>
+						<th><span contenteditable>Price</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>1</span></td>
+						<td><span contenteditable>monthly subscription for september</span></td>
+						<td><span  contenteditable>#</span><span contenteditable>15,000.00</span></td>
+						<td><span contenteditable>1</span></td>
+						<td><span  contenteditable>#</span><span>15,000.00</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<a class="add" onclick="add">+</a>
+			<table class="balance">
+				<tr>
+					<th><span contenteditable> Sub Total</span></th>
+					<td><span>#</span><span>0.00</span></td>
+				</tr>
+				<tr>
+					<th><span>Tax <span contenteditable id="vat_percent">0%</span></span></th>
+					<td contenteditable><span  contenteditable>#</span><span  contenteditable>0.00</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Total</span></th>
+					<td><span>#</span><span>0.00</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Paid</span></th>
+					<td><span  contenteditable>#</span><span contenteditable>0.00</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>To Balance</span></th>
+					<td><span>#</span><span>0.00</span></td>
+				</tr>
+			</table>
+		</article>
+		<aside contenteditable>
+			<h1><span contenteditable></span></h1>
+			<div>
+				<p>Thank you for your Patronage</p>
+				<p contenteditable>Make transfer to: RCCG National Headquarters, <em>Account Number: 1006803688, UBA</em>
+				<p contenteditable> Make transfer to: RCCG Information Gateway, <em>Account Number: 1014618478, Zenith Bank</em></p>
+				</p>
+				<p>
+					For enquiries on this invoice, call Idowu Timothy (ICT Business Telecoms) 
+					08064322261 ictbusinesstelecoms@gmail.com, infordotict@gmail.com
+				</p>
+				<p contenteditable>
+					Please note that the above are one off payment.
+					This quote is valid for <em>2 weeks</em>
+				</p>
+			</div>
+			<div class="signature">
+				<br>
+				<br>
+				<br>
+				<span>
+					<img src="signature.png" alt="signature">
+					<p>Timothy idowu</p>
+					<p>Head, Business Telecoms, ICT</p>
+				</span>
+				<span class="right" style="color: blue;">
+					<p>Kind regards,</p>
+					<p>RCCG INFORMATION GATEWAY</p>
+				</span>
+			</div>
+		</aside>
+		<script type="text/javascript">
+			let date = document.getElementById("date");
+			let time = document.getElementById("time");
+
+			let newDate = new Date();
+			let year = newDate.getFullYear();
+			let month = newDate.getMonth();
+			let todaySDate = newDate.getDate();
+			let hours = newDate.getHours();
+			let minutes = newDate.getMinutes();
+			let seconds = newDate.getSeconds();
+			date.innerHTML = " " + todaySDate + "/ " + month + "/ " + year;
+			time.innerHTML = hours + ": " + minutes + ": " + seconds;
+		</script>
+	</body>
+</html>
